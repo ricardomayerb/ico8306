@@ -1,5 +1,27 @@
 library(tidyverse)
 
+# Problem
+# If there are twelve cars crossing a bridge per minute on average, 
+# find the probability of having seventeen or more cars crossing 
+# the bridge in a particular minute.
+# 
+# Solution
+# The probability of having sixteen or less cars crossing the bridge 
+# in a particular minute is given by the function ppois.
+
+ppois(16, lambda=12)   # lower tail 
+# [1] 0.89871
+# Hence the probability of having seventeen or more cars crossing the bridge in a minute is in the upper tail of the probability density function.
+
+ppois(16, lambda=12, lower=FALSE)   # upper tail
+# 0.10129
+
+# Answer
+# If there are twelve cars crossing a bridge per minute on average,
+# the probability of having seventeen or more cars crossing the bridge 
+# in a particular minute is 10.1%.
+
+
 # What is the probability of selecting x = 14 red marbles
 # from a sample of k = 20 taken from an urn containing 
 # m = 70 red marbles and n = 30 green marbles?
