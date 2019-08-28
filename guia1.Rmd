@@ -1,0 +1,54 @@
+---
+title: "guia"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Aprendiendo R por su cuenta
+
+Distintos niveles
+
+1. Sabes que es R y RStudio?
+
+2. Puedes comenzar una sesión en RStudio?
+
+3. Sabes qué es un script de R?
+
+4. Si tienes un script en tus achivos, lo puedes abrir?
+
+5. Si tienes un script abierto en RStudio, puedes ejecutarlo? (línea por línea o todo a la vez)
+
+6. Puedes crear un nuevo script en RStudio?
+
+7. Sabes cómo asignarle un valor a un objeto? (e.g.  "a <- 3+7")
+
+8. Sabes como crear un vector?
+
+9. Sabes como usar `plot` e `hist` para crear diagramas de dispersión e histogramas básicos?
+
+10. Sabes lo que son las funciones en R y cómo se usan? (por ejemplo, la función `mean`)
+
+11. Sabes como crear un data.frame y un tibble?
+
+
+
+
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
