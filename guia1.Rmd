@@ -9,7 +9,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Aprendiendo R por su cuenta
 
-Distintos niveles
+
+### *Usted está aquí*
+Esta es una lista de supermercado de cosas que vas a ir aprendiendo y que te servirá para ver donde estás.  Están aproximadamente en orden. Como ya han asistido a varias sesiones de laboratorio computacional, doy por hecho que todos están OK al menos hasta el item 7. Del 8 al 10 o bien lo saben o les va a parecer conocido cuando lo vuelvan a ver. Asumiré que no saben nada desde el 11 hacia adelante.  Al llegar al final de la lista ya tienes todas las habilidades básicas para escribir tus propios programas y seguir fácilmente las explicaciones que encontrarás en internet.
 
 1. Sabes que es R y RStudio?
 
@@ -33,17 +35,50 @@ Distintos niveles
 
 11. Sabes como crear un data.frame y un tibble?
 
+12. Sabes como crear una lista?
+
+13. Sabes como seleccionar partes de un vector? de un data.frame? de una lista?
+
+14. Sabes como manipular un data.frame o un tibble?
+
+15. Puedes crear un diagrama de dispersión, un diagrama de caja usando ggplot2?
+
+16. Sabes cómo importar una hoja de Excel en R?
+
+17. Has escrito un for loop?
+
+18. Has escrito una función?
 
 
 
 
+## Vectores y primeras funciones
 
+### Vectores
 
-```{r cars}
-summary(cars)
+Uno de los objetos más usados y más sencillos es el vector. Puede ser creado en forma manual (usando la función `c`, *comobinar*) o como el resultado final que nos devuelve alguna otra función de `R` (como `rnorm`):
+
+```{r vectores}
+# crear manualmente un vector de números y asignar el vector a un objeto que llamaremos x
+x <- c(2, 65, 8, 33)
+
+# crear manualmente un vector de strings (texto) y asignar el vector a un objeto que llamaremos y
+y <- c("mejor curso", "o mejor curso")
+
+# crear manualmente un vector lógico  asignar el vector a un objeto que llamaremos z
+z <- c(TRUE, FALSE, TRUE)
+
+# para imprimir los valores en la consola debemos escribir el nombre del objeto y ejecutar o bien 
+# usar la función print
+
+x
+y
+print(z)
+
 ```
 
-## Including Plots
+
+
 
 You can also embed plots, for example:
 
