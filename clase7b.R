@@ -35,7 +35,7 @@ dhyper(x = x, m = m, n = n, k = k)
 k * m / (m + n)
 k * m / (m + n) * (m + n - k) / (m + n) * n / (m + n - 1)
 
-options(scipen = 999, digits = 2) # sig digits
+# options(scipen = 999, digits = 2) # sig digits
 
 density = dhyper(x = 1:20, m = m, n = n, k = k)
 
