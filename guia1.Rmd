@@ -1,0 +1,207 @@
+---
+title: "guia"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Aprendiendo R por su cuenta
+
+
+### *Usted está aquí*
+Esta es una lista de supermercado de cosas que vas a ir aprendiendo y que te servirá para ver donde estás.  Están aproximadamente en orden. Como ya han asistido a varias sesiones de laboratorio computacional, doy por hecho que todos están OK al menos hasta el item 7. Del 8 al 10 o bien lo saben o les va a parecer conocido cuando lo vuelvan a ver. Asumiré que no saben nada desde el 11 hacia adelante.  Al llegar al final de la lista ya tienes todas las habilidades básicas para escribir tus propios programas y seguir fácilmente las explicaciones que encontrarás en internet.
+
+1. Sabes que es R y RStudio?
+
+2. Puedes comenzar una sesión en RStudio?
+
+3. Sabes qué es un script de R?
+
+4. Si tienes un script en tus achivos, lo puedes abrir?
+
+5. Si tienes un script abierto en RStudio, puedes ejecutarlo? (línea por línea o todo a la vez)
+
+6. Puedes crear un nuevo script en RStudio?
+
+7. Sabes cómo asignarle un valor a un objeto? (e.g.  "a <- 3+7")
+
+8. Sabes como crear un vector?
+
+9. Sabes como usar `plot` e `hist` para crear diagramas de dispersión e histogramas básicos?
+
+10. Sabes lo que son las funciones en R y cómo se usan? (por ejemplo, la función `mean`)
+
+11. Sabes como crear un data.frame y un tibble?
+
+12. Sabes como crear una lista?
+
+13. Sabes como seleccionar partes de un vector? de un data.frame? de una lista?
+
+14. Sabes como manipular un data.frame o un tibble?
+
+15. Puedes crear un diagrama de dispersión, un diagrama de caja usando ggplot2?
+
+16. Sabes cómo importar una hoja de Excel en R?
+
+17. Has escrito un for loop?
+
+18. Has escrito una función?
+
+
+
+
+## Vectores y primeras funciones
+
+### Vectores
+
+Uno de los objetos más usados y más sencillos es el vector. Puede ser creado en forma manual (usando la función `c`, *comobinar*) o como el resultado final que nos devuelve alguna otra función de `R` (como `rnorm`):
+
+```{r vectores}
+# crear manualmente un vector de números y asignar el vector a un objeto que llamaremos x
+x <- c(2, 65, 8, 33)
+
+# crear manualmente un vector de strings (texto) y asignar el vector a un objeto que llamaremos y
+y <- c("mejor curso", "o mejor curso")
+
+# crear manualmente un vector lógico  asignar el vector a un objeto que llamaremos z
+z <- c(TRUE, FALSE, TRUE)
+
+# para imprimir los valores en la consola debemos escribir el nombre del objeto y ejecutar o bien 
+# usar la función print
+
+x
+y
+print(z)
+```
+
+### Primeras funciones
+Ya hemos usado dos funciones en el ejemplo anterior: `c` y `print`. Lo primero que debemos notar es que siempre que se usan debe agregarse un paréntesis después del nombre de la función: `c()` y `print()`. Lo segundo es que dentro del paréntsis van objectos que dentro de la función reciben el nombre de argumentos. Algunos argumentos tienen un valor por defecto, que es usado por la función y otros que, al no tener asignado un valor por defecto, deben pedirle al usuario que especifique un valor al momento de usar la función. 
+
+Que son los argumentos y aquellos que tienen valor por defecto quedan más claro si estudiamos la función `mean`:
+
+```{r mean1}
+# un vector igual a x, pero agregando un missing value al final 
+# missing values en R se representan con NA e indican que no existe 
+# un valor para ese elemento
+
+xna <- c(2, 65, 8, 33, NA)
+
+# usemos la función mean
+mean(x = xna)
+
+# oops, que pasó? usemos la función otra vez
+# pero especificando el valor de otro de sus argumentos
+mean(x = xna, na.rm = TRUE)
+
+# ahora si calculó el promedio, excluyendo el valor NA
+```
+
+Por qué cambió el resultado al incluir explicitamente `na.rm = TRUE` dentro de la función? La explicación la encontramos al ver la página de ayuda de `mean`, que contiene, entre otras cosas, las siguientes explicaciones:
+
+- *Default S3 method: mean(x, trim = 0, na.rm = FALSE, ...)*. Qué aprendemos? Que la función mean tiene tres argumentos, `x`, `trim` y `na.rm`, y que dos de ellos tiene valores por defecto de modo que, si estamos conformes, podemos ahorrarnos trabajo y no especificarlos al usar la función. Esta es la razón de por qué es imprescindible que *nosotros* le asignemos un valor a `x`.  El argumento `trim` tiene asignado el valor 0 y es lo que va a usar a menos que especifiquemos otro valor. Finalmente, vemos **que el argumento `na.rm` tiene asignado por defecto el valor `FALSE`** y es el que va a usar a menos que especifiquemos otro valor, tal como lo hicimos  la segunda vez que intentamos calcular el promedio: `mean(x = xna, na.rm = TRUE)`.
+
+- *x: An R object. Currently there are methods for numeric/logical vectors and date, date-time and time interval objects. Complex vectors are allowed for trim = 0, only.*. Nos dice que x debe ser un objeto válido en R y que actualmente la función acepta vectores lógicos, vectores numéricos y vectores de fechas.
+
+- *na.rm: a logical value indicating whether NA values should be stripped before the computation proceeds.*. OK, este es el argumento que nos importa! Dice que debe ser igual a un valor lógico (es decir TRUE o FALSE) indicando si debe remover los `NA` antes de calcular el promedio. Y como el valor por defecto que tiene ese argumento es FALSE, así es que **no** removerá ningún NA a menos que explicitamente escribamos `rm.na = TRUE` al usar la función. 
+
+
+En `R` y en muchos lenguajes de programación la suma de un número con un `NA` es igual a `NA`, la división de un número por un `NA` es igual a `NA` ... en general todas las operaciones ariméticas que involucran al menos un `NA` resultan en `NA`.   
+
+Un último punto sobre argumentos: en la definición de la función los argumentos tienen un orden (x primero, trim segundo, etc.). Podemos obviar los nombres de los argumentos y simplemente escribir su valor, por ejemplo `mean(xna, 0, FALSE)` y R va a descansar en la posición de cada uno para saber a qué argumento se refiere, es decir asume que el primer valor es el de x, el segundo es el de trim, etc. La ventaja de usar los nombres es hacer más explícito al lector nuestras opciones y, adicionalmente aquellos argumentos en que usemos los nombres pueden aparecer en cualquier orden.
+
+El tema de las funciones y los argumentos puede ser un poco pesado de digerir, por lo que aquí agregaremos unas líneas de código a modo de ilustración:
+
+```{r resumenargumentos}
+
+# recordemos nuestro objecto "xna":
+xna
+
+# Hacer esto:
+mean(x = xna)
+
+# ... es equivalente a usar los valores por defecto:
+mean(x = xna, trim = 0, na.rm = FALSE)
+
+# Esto cambia el valor de na.rm pero mantiene el de trim
+mean(x = xna, na.rm = TRUE)
+
+# Esto cambia el valor de trim pero mantiene el de na.rm
+mean(x = xna, trim =0.2)
+
+# Hacer esto:
+mean(x = xna, trim = 0.2, na.rm = TRUE)
+
+# .. es equivalente a 
+mean(xna, 0.2, TRUE) # (porque se guía por la posición de los arg)
+
+# Sin embargo lo siguiente es inválido:
+# mean(xna, TRUE, 0.2) # (porque le asigna TRUE a trim y 0.2 a na.rm)
+
+# Pero usar los nombres nos  permite cambiar el orden:
+mean(x = xna, na.rm = TRUE, trim = 0.2)
+
+# Posición y nombre se pueden usar en la misma llamada a mean:
+# x lo entiende por posición y los otros dos por nombre
+mean(xna, na.rm = TRUE, trim = 0.2)
+
+# esa última formulación es muy común porque el primer argumente suele
+# ser el más usado y el que todo el mundo tiene claro cuál es.
+
+```
+
+Para testear si entendió, **lea el help de la función `rnorm`** (escribiendo `?rnorm` en la consola), vea cuantos argumentos tiene, cuales argumentos tienen valores por defecto y cuales son estos valores.
+
+#### Recursos relacionados
+A esta altura, pueden consultar las siguientes secciones de libros o tutoriales que están en línea para repasar y complementar lo aprendido hasta aquí:
+
+- https://es.r4ds.hadley.nz/flujo-de-trabajo-conocimientos-basicos.html
+- https://www.dummies.com/programming/r/how-to-use-a-function-in-r/
+- https://rafalab.github.io/dsbook/r-basics.html#the-very-basics y puntualmente https://rafalab.github.io/dsbook/r-basics.html#functions
+- Aquí hay un video un poco antiguo, pero si ven el canal de youtube van a encontrar muchos videos muy útiles y, lo mejor de todo, duran dos minutos o menos! https://www.youtube.com/watch?v=wiXmMdcgs-o&list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC&index=11&t=0s
+
+ 
+### Otras funciones comunes en estadística
+
+A modo de práctica, le invitamos a probar estas otras funciones muy comunes en estadística, que incluyen gráficos, estadísticas descriptiva y generación de numeros aleatorios. Pruebe usted también otros valores para los argumentos para explorar su comportamiento.
+
+Comencemos generando números aleatorios desde una distribución normal y desde una distribución chi-cuadrado
+
+```{r}
+# chi-squared
+rchisq(n = 6, df = 4)
+rchisq(n = 10, df = 4)
+a <- rchisq(n = 1000, df = 4)
+
+
+# normal
+rnorm(n = 6)
+rnorm(n = 10)
+rnorm(n = 10, mean = 2)
+b <- rnorm(1000, mean = 2)
+
+# histograms
+hist(a, breaks = 40)
+hist(b)
+
+# desviación estandard
+sd(a)
+
+# quantiles de los datos, ignorando la distribución
+quantile(a)
+quantile(a, 0.3)
+quantile(a, c(0.3, 0.6))
+
+# quantiles de la distribución, teóricos 
+qchisq(df = 4, p = c(0.3, 0.6))
+
+# boxplot
+boxplot(a)
+
+# similar al box plot, pero como texto
+summary(a)
+
+```
+
+
