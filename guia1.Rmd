@@ -1,5 +1,5 @@
 ---
-title: "guia"
+title: "Guia 1: vectores, funciones y data frames"
 output: html_document
 ---
 
@@ -7,11 +7,18 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Aprendiendo R por su cuenta
+
+<!-- ```{r loading, message=FALSE} -->
+<!-- library(tidyverse) -->
+<!-- library(readxl) -->
+<!-- library(datos) -->
+<!-- ``` -->
+
+## Aprendiendo R por su cuenta, primera parte.
 
 
 ### *Usted está aquí*
-Esta es una lista de supermercado de cosas que vas a ir aprendiendo y que te servirá para ver donde estás.  Están aproximadamente en orden. Como ya han asistido a varias sesiones de laboratorio computacional, doy por hecho que todos están OK al menos hasta el item 7. Del 8 al 10 o bien lo saben o les va a parecer conocido cuando lo vuelvan a ver. Asumiré que no saben nada desde el 11 hacia adelante.  Al llegar al final de la lista ya tienes todas las habilidades básicas para escribir tus propios programas y seguir fácilmente las explicaciones que encontrarás en internet.
+Esta es una lista de supermercado de cosas que vas a ir aprendiendo y que le servirá para ver donde está.  Están aproximadamente en orden. Como ya ha asistido a varias sesiones de laboratorio computacional, doy por hecho que  está OK al menos hasta el item 7. Del 8 al 11 o bien lo sabe o le va a parecer conocido cuando lo vuelva a ver. Asumiré que no sabe nada desde el 11 hacia adelante.  Al llegar al final de la lista tendrá todas las habilidades básicas para escribir sus propios programas y seguir los ejemplos, tutoriales y explicaciones  encontrará en internet.
 
 1. Sabes que es R y RStudio?
 
@@ -33,21 +40,23 @@ Esta es una lista de supermercado de cosas que vas a ir aprendiendo y que te ser
 
 10. Sabes lo que son las funciones en R y cómo se usan? (por ejemplo, la función `mean`)
 
-11. Sabes como crear un data.frame y un tibble?
+11. Sabes como instalar y cargar un paquete de R?
 
-12. Sabes como crear una lista?
+12. Sabes como crear un data.frame y un tibble?
 
-13. Sabes como seleccionar partes de un vector? de un data.frame? de una lista?
+13. Sabes como crear una lista?
 
-14. Sabes como manipular un data.frame o un tibble?
+14. Sabes como seleccionar partes de un vector? de un data.frame? de una lista?
 
-15. Puedes crear un diagrama de dispersión, un diagrama de caja usando ggplot2?
+15. Sabes como manipular un data.frame o un tibble?
 
-16. Sabes cómo importar una hoja de Excel en R?
+16. Puedes crear un diagrama de dispersión, un diagrama de caja usando ggplot2?
 
-17. Has escrito un for loop?
+17. Sabes cómo importar una hoja de Excel en R?
 
-18. Has escrito una función?
+18. Has escrito un `for` loop?
+
+19. Has escrito una función?
 
 
 
@@ -56,7 +65,7 @@ Esta es una lista de supermercado de cosas que vas a ir aprendiendo y que te ser
 
 ### Vectores
 
-Uno de los objetos más usados y más sencillos es el vector. Puede ser creado en forma manual (usando la función `c`, *comobinar*) o como el resultado final que nos devuelve alguna otra función de `R` (como `rnorm`):
+Uno de los objetos más usados y más sencillos es el vector. Puede ser creado en forma manual (usando la función `c`, *combinar*) o como el resultado final que nos devuelve alguna otra función de `R` (como `rnorm`):
 
 ```{r vectores}
 # crear manualmente un vector de números y asignar el vector a un objeto que llamaremos x
@@ -151,11 +160,14 @@ mean(xna, na.rm = TRUE, trim = 0.2)
 
 ```
 
-Para testear si entendió, **lea el help de la función `rnorm`** (escribiendo `?rnorm` en la consola), vea cuantos argumentos tiene, cuales argumentos tienen valores por defecto y cuales son estos valores.
+#### Ejercicio
+
+ + Para testear si entendió, **lea el help de la función `rnorm`** (por ejemplo, escribiendo `?rnorm` en la consola), identifique cuántos argumentos tiene, cuáles argumentos tienen valores por defecto y cuales son estos valores por defecto.
 
 #### Recursos relacionados
 A esta altura, pueden consultar las siguientes secciones de libros o tutoriales que están en línea para repasar y complementar lo aprendido hasta aquí:
 
+- http://stat545.com/block002_hello-r-workspace-wd-project.html
 - https://es.r4ds.hadley.nz/flujo-de-trabajo-conocimientos-basicos.html
 - https://www.dummies.com/programming/r/how-to-use-a-function-in-r/
 - https://rafalab.github.io/dsbook/r-basics.html#the-very-basics y puntualmente https://rafalab.github.io/dsbook/r-basics.html#functions
@@ -204,5 +216,166 @@ summary(a)
 
 ```
 
+### Practique usando funciones
+
+#### Ejercicio
+ + Prueba las siguientes funciones: consulta su página de ayuda, mira los ejemplos en la página de ayuda, pruébalos en la consola, prueba distintos valores en algunos argumentos y vea que sucede
+
+    - `rbinom`
+    - `qbinom`
+    - `pnorm`
+    - `qexp`
+    - `head`
+    - `tail`
+    
+ + Use la función `rbinom` para generar una muestra de 22 números aleatorios desde una distribución binomial con parámetros `size = 5` y `prob = 0.6`.
+ 
+ + Use la función `pnorm` para obtener el valor de $y$ tal que $Prob(x \leq y) = 0.92$, donde $x$ proviene de una distribución normal con media igual a 0 y varianza igual a 1. ¿Es necesario cambiar alguno de los valores por defecto que usa la función `pnorm`? 
+
+#### Recursos para explorar:
+
++ https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/estadistica-descriptiva-con-R.pdf
+
+## Paquetes
+
+Un paquete (*package*) en `R` es un archivo que contiene nuevas funciones. Cuando $R$ se instala por primera vez, se instalan algunos paquetes, como los paquetes `base`, `utils` y `stats` que contienen las funciones más elementales de `R`. No sólo vienen instalados cuando se instala `R`, si no que que cuando se abre un sesión (por ejemplo en RStudio) Ud. automáticamente tiene acceso a dichas funciones: por ejemplo podemos usar las funciones `c` y `mean` del paquete `base`, así como la función `pnorm` del paquete `stats`.  
+
+A menudo, sin embargo, queremos usar funciones que se encuentran en otros paquetes. Por ejemplo, si queremos estimar la probabilidad acumulada en una *Normal Estándar Truncada* por la derecha en el valor 1 (es decir, una distribución normal estándar a la que se amputó la sección a la derecha del número 1), o generar números aleatorios prevenientes de dicha distribución, nada en los paquetes `base` o `stats` nos sirve. Una breve búsqueda en internet nos revela que existe un paquete de `R` llamado `extraDistr` que contiene funciones apropiadas para estos fines, en concreto las funciones `ptnorm` y `rtnorm`.
+
+Una consulta al panel *Packages* en RStudio nos revela que no tenemos dicho paquete en nuestro computador: deberemos instalarlo. La funciónque instala paquete se llama `install.packages` y fácilmente utilizable vía el panel *Packages* en RStudio, basta con hacer click en `Install` y seguir las instrucciones  (básicamente escribir el nombre del paquete que deseamos instalar). En la consola se va a ejecutar el comando install.packages("extraDistr") y apareceran algunos mensajes relativos al proceso de instalar
+
+OK, ahora usemos las funciones que queríamos, por ejemplo `ptnorm`:
+
+```{r extradistrfail, error=TRUE}
+ptnorm(0.50, b = 1)
+```
+
+¿No la encuentra? ¿Pero cómo? Si acabamos de instalar el paquete `extraDistr`!! ... Bueno porque una cosa es instalar un paquete y otra es cargarlo. Vea lo que ocurre si usamos la función `library` antes de usar `ptnorm`:
+
+```{r extradistr}
+library(extraDistr)
+ptnorm(0.50, b = 1)
+```
+
+Ahora sí! Lo que ocurre es que `library(extraDistr)` trae a la sesión de `R` en curso todos los nombres de las fuciones contenidas en ese paquete. Una vez que `library(extraDistr)` se ha ejecutado, podemos usar hasta el final de la sesión todas las funciones que ahí existen. Cuando reiniciamos `R` debemos ejecutar `library(extraDistr)` otra vez para poder usar las funciones.  Los paquetes `base` y `stats` no son distintos, lo que ocurre es que los comandos `library(base)` y `library(stats)` son ejecutados tras bambalinas cada vez que se inicia un sesión de `R`, sin que usted se entere.
+
+Se recomienda poner en las primeras líneas de su script todos los comandos del tipo `library(xyz)` que se requieran para correr el script completo, de este modo cualquier usuario sabe de antemano si debe instalar algún paquete que le falte.
+
+#### Ejercicio
+
++ Instale el paquete `tibble`
++ Instale el paquete `readxl`
++ Instale el paquete `datos`
+
+
+## Data frames y tibbles
+### Data frames
+El tipo de objeto más usado para representar un conjunto de datos es un data frame. Aquí hay un ejemplo:
+
+```{r showdataframe}
+print(mtcars)
+
+class(mtcars)
+```
+
+Lo que vemos son las seis primeras filas del data frame, que contiene once columnas, que representan once variables. Además vemos que las filas tiene nombres, en este caso el modelo de automóvil. Una pregunta válida es si no será mejor tener los modelos de autos como una variable igual a las otras once. 
+
+Por ahora nos preocuparemos de dos formas de crear data frames: a mano y como resultado de importar un hoja de excel
+
+```{r importardafaframe}
+# la funcion read.csv2 retorna un data frame 
+notas_curso_df <- read.csv2("notas_curso.csv")
+
+notas_curso_df
+class(notas_curso_df)
+
+# también se podría haber creado manualmente
+# una COLUMNA a la vez
+notas_curso_df_manual <- data.frame(
+  nombre = c("pedro", "juan", "diego", "frida", "simone", "judith"),
+  solemne = c(3.5, 4, 5, 6, 5.5, 7),
+  controles = c(5, 3, 6, 6.5, 7, 6),
+  examen = c(3, 4, 4.8, 5.5, 6, 6),
+  final = c(3.8, 3.7, 5.2, 6, 6.2, 6.3))
+
+```
+
+Es perfectamente posible crear previamente el contenido de alguna columna como un vector y luego simplemente escribir el nombre de la columna, el signo igual, y nuestro vector.
+
+
+
+### Tibbles
+
+Tibbles son tipo especial data frame, creadas en el contexto de los paquetes que forman el tidyverse. Las formas de manipularlos son generalmente las mismas. En una primera etapa la principal diferencia que van a encontrar es que la forma en que aparecen en la consola es distinta: las data frames tratan de mostrar todas las filas y columnas en la consola mientras que las tibble muestran solo las primeras filas y la cantidad de columnas que caben en el ancho de la consola. Adicionalmente entrega información sobre el número de filas y columnas y sobre el tipo (clase) de datos en cada columna (p.e. `dbl` para clase double, `chr` para datos clase character, etc.)
+
+Veamos a modo de ejemplo una tibble de nombre diamantes:
+
+```{r diamantestbl}
+library(datos) # instaló el package "datos", cierto? 
+diamantes
+
+class(diamantes)
+
+```
+
+En la última linea podemos ver que pertenecen a la clase de los data frames, pero son un tipo especial llamado tbl_df.
+
+
+La forma en que se crean son muy similares a los data frames. En particular algunas funciones retornan los resutados en forma de tibble o pueden ser creadas directamente por el usuario. Tal como en el caso anterior, veamos una función que importa datos y retorna un tibble y una manera manual de crear el mismo objeto:
+ 
+
+```{r importtibble}
+# read_excel, como en general las funciones del tidyverse
+# retorna un tibble en vez de un data frame
+library(readxl) # instaló el package "readxl", cierto?
+notas_curso_tbl <- read_excel("notas_curso.xlsx")
+
+# la creacion manual es muy similar a un data frame   
+
+library(tibble) # instalarlo era parte de un ejercicio más arriba
+notas_curso_tbl_manual <- tibble(
+  nombre = c("pedro", "juan", "diego", "frida", "simone", "judith"),
+  solemne = c(3.5, 4, 5, 6, 5.5, 7),
+  controles = c(5, 3, 6, 6.5, 7, 6),
+  examen = c(3, 4, 4.8, 5.5, 6, 6),
+  final = c(3.8, 3.7, 5.2, 6, 6.2, 6.3))
+
+```
+
+
+#### Recursos relacionados a tibbles y data frames
+
++ https://rafalab.github.io/dsbook/r-basics.html#data-frames
++ https://es.r4ds.hadley.nz/tibbles.html
++ https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html
++ https://rafalab.github.io/dsbook/tidyverse.html#tibbles
++ https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/data-wrangling-cheatsheet_Spanish.pdf
++ https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/data-transformation_Spanish.pdf
+
+
+### Ejercicios
+
+En el siguiente ejercicio van a crear unos vectores y luego usaran esos vectores como columnas para crear un data frame
+
++ Cree un data frame con dos columnas: *valor_x* y *valor_y*. En la primera columna debe usar el vector *mis_x* y en la segunda, *mis_y*. Guarde el data frame en un objeto de nombre `df_xy`
+
+```{r creardara}
+# primero creamos dos vectores de numeros
+mis_x <- seq(1, 20)
+mis_y <- 3 + 0.5*mis_x + rnorm(20)
+
+# breve vistazo
+print(mis_x)
+print(mis_y)
+ 
+# Con esos vectores, cree el data frame pedido.
+
+# considere lo siguiente como ejemplo:
+
+# df_xy <- data.frame(valor_x = un vector, valor_y = el otro vector)
+
+# ahora usted:
+
+```
 
 ## Creando `data.frame`s y `tibble`s

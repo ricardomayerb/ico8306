@@ -1,0 +1,34 @@
+---
+title: "Guía 2"
+author: "Ricardo Mayer"
+date: "8/9/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Continuamos avanzando en la lista de cosas que deben saber. En esta guía veremos listas, indexación, manipulación de data frames y traer datos desde excel
+
+## Listas
+Las listas son un tipo de objecto muy versátil, porque dentro de una misma lista puedes incluir números, texto, data frames, tibbles, otras listas etc. Hay muchas funciones que retornan una gran lista como resultado y a menudo uno debe escoger qué elemento de la lista es el que nos interesa.
+
+Veamos cómo crear manualmente una lista:
+
+```{r listamanual}
+
+# a,b, un_df y un_tbl son los nombres que le daremos a los elementos
+# de esta lista. Podríamos no usar nombres.
+lista_ejemplo <- list(a = "Hola", b = 4, un_df = notas_curso_df, 
+                      un_tibble = notas_curso_tbl)
+
+lista_ejemplo
+
+class(lista_ejemplo)
+
+```
+
+
+
+
