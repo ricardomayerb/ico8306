@@ -377,4 +377,3 @@ print(mis_y)
 # ahora usted:
 
 ```
-
