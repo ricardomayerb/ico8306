@@ -1,7 +1,7 @@
 ---
-title: "Guía 2"
+title: "Guía 2, ICO8306"
 author: "Ricardo Mayer"
-date: "8/9/2019"
+date: "`r Sys.Date()`"
 output: bookdown::html_document2
 ---
 
