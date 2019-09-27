@@ -257,41 +257,67 @@ Por defecto, la función entrega al usuario el ultimo objeto que calcula.
 ## Probabilidades discretas
 
 ```{r}
+# numero de personas en la sala
 n <- 50
-bdays <- sample(1:365, n, replace = TRUE)
+
+# dia del año en que están de cumpleaños
+# la función clave es sample. Note que estamos sampleando con reemplazo
+# eso permite que si el día 113 ya salió, pueda salir otra vez
+cumples <- sample(1:365, n, replace = TRUE)
+
+# observe el resultado de esto
 duplicated(c(1,2,3,1,4,3,5))
-any(duplicated(bdays))
-same_birthday <- function(n){
-  bdays <- sample(1:365, n, replace=TRUE)
-  any(duplicated(bdays))
+
+# any retorna TRUE si al menos 
+any(duplicated(cumples))
+
+# para un grupo al azar de n personas
+mismo_cumple <- function(n){
+  cumples <- sample(1:365, n, replace=TRUE)
+  any(duplicated(cumples))
 }
 
+# pruebe la nueva función:
+mismo_cumple(20)
+mismo_cumple(20)
+mismo_cumple(20)
+mismo_cumple(50)
+
+
+
+# Replicate es muy similar a un for loop, pero escrito en forma
+# más abreviada
 B <- 10000
-results <- replicate(B, same_birthday(50))
+results <- replicate(B, mismo_cumple(50))
+
+# recuerde que FALSE es tratado como 0 y TRUE como 1
 mean(results)
 
+# si quisieramos estimar la probabilidad con n=35 escribiriamos
+results <- replicate(B, mismo_cumple(35))
+
+# podemos escribir una función que nos permita variar el numero de repeticiones (B) y, mas importante, el número de personas en la sala (n)
 compute_prob <- function(n, B=10000){
-  results <- replicate(B, same_birthday(n))
+  results <- replicate(B, mismo_cumple(n))
   mean(results)
 }
 
-n <- seq(1,60)
-prob <- sapply(n, compute_prob)
+personas <- 1:60
 
-library(tidyverse)
-prob <- sapply(n, compute_prob)
-qplot(n, prob)
+# sapply es otra de las formas abreviadas de hacer lo mismo que un for loop
+# el primer argumento es algo como 1:5 y el segundo es una función de la variable-índice del loop (i.e. de i=1,2,3 ...)
 
-exact_prob <- function(n){
-  prob_unique <- seq(365,365-n+1)/365 
-  1 - prod( prob_unique)
-}
-eprob <- sapply(n, exact_prob)
+# En este caso calculara compute_prob(i), donde i va a ir tomando
+# todos los valores en el vector personas (1,2,3 .... 60)
+prob <- sapply(personas, compute_prob)
 
-qplot(n, prob) + 
-  geom_line(aes(n, eprob), col = "red")
-
+# mire como cambia la probabilidad de coincidencia
+plot(personas, prob)
 
 
 ```
 
+### Ejercicio
++ Para qué cantidades de personas las probabilidades de una coincidencia son mayores a 25%, 50% y 66,67%? 
+
++ Modifique el código para poder calcular la probabilidad de que al menos 3 personas tengan el mismo cumpleaños.
