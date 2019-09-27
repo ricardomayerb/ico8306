@@ -241,7 +241,7 @@ mi_suma <- function(primer_numero, segundo_numero) {
   resultado <- primer_numero + segundo_numero
 }
 
-# ahoraque ya está definida, usémosla
+# ahora, que ya está definida, pruébela
 mi_suma(3, 4)
 mi_suma(9, 41)
 mi_suma(50, 50)
@@ -249,5 +249,49 @@ mi_suma(50, 50)
 ```
 Por defecto, la función entrega al usuario el ultimo objeto que calcula. 
 
+### Ejercicio
++ Cambie la función anterior, de modo que acepte tres argumentos en vez de dos y que el resultado de la función sea la suma de los tres argumentos
 
-Pasemos ahora a un ejemplo más interesante.
++ Escriba una función que tome dos argumentos y cuyo resultado sea la multiplicación de los dos argumentos (es casi idéntica a `mi_suma`). Como nombre de la función, use `mi_multiplicacion`
+
+## Probabilidades discretas
+
+```{r}
+n <- 50
+bdays <- sample(1:365, n, replace = TRUE)
+duplicated(c(1,2,3,1,4,3,5))
+any(duplicated(bdays))
+same_birthday <- function(n){
+  bdays <- sample(1:365, n, replace=TRUE)
+  any(duplicated(bdays))
+}
+
+B <- 10000
+results <- replicate(B, same_birthday(50))
+mean(results)
+
+compute_prob <- function(n, B=10000){
+  results <- replicate(B, same_birthday(n))
+  mean(results)
+}
+
+n <- seq(1,60)
+prob <- sapply(n, compute_prob)
+
+library(tidyverse)
+prob <- sapply(n, compute_prob)
+qplot(n, prob)
+
+exact_prob <- function(n){
+  prob_unique <- seq(365,365-n+1)/365 
+  1 - prod( prob_unique)
+}
+eprob <- sapply(n, exact_prob)
+
+qplot(n, prob) + 
+  geom_line(aes(n, eprob), col = "red")
+
+
+
+```
+
