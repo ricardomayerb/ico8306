@@ -2,7 +2,9 @@
 title: "Guía 2, ICO8306"
 author: "Ricardo Mayer"
 date: "`r Sys.Date()`"
-output: bookdown::html_document2
+output: 
+  pdf: bookdown::pdf_document2
+  html: bookdown::html_document2
 ---
 
 ```{r setup, include=FALSE}
