@@ -1,0 +1,94 @@
+---
+title: "Econometría II 2019"
+author: 'Profesor: Fernando Díaz H.'
+subtitle: Montecarlo para el Modelo de Regresión Simple
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(gridExtra)
+library(stargazer)
+```
+
+# Simulación de Montecarlo
+
+La *Simulación de Montecarlo* es un método estadístico utilizado para resolver problemas complejos a través de la generación de variables aleatorias. En Econometría, los experimentos de MOntecarlo son frecuentemente utilizados para estudiar las propiedades estadísticas de diversos métodos de estimación de los parámetros poblacionales. Son particularmente útiles para estudiar el comportamiento de los estimadores en muestras pequeñas.
+
+# El Modelo Simple 
+
+La  **Función de Regresión Poblacional** viene dada por:
+
+\begin{equation}
+y_{i}=\beta_{1}+\beta_{2}x_{i}+\mu_{i} \label{eq:ec1}
+\end{equation}
+
+
+Supongamos que seguimos con el modelo visto en clases donde estamos interesados en la relación excistente entre las horas de estudio semanales del universo de estudiantes de nuestra Universidad y el score que obtienen en la prueba de medio semestre. La idea es generar los datos poblacionales a través de la ecuación \eqref{eq:ec1}. Para ellos, suponemos una población de $N = 500$, con los  **parámetros poblacionales**  $\beta_{1}=5$ y $\beta_{2}=5$.
+
+
+```{r a, echo=FALSE} 
+
+# ************   Generar la Funcion de Regrecsion Poblacional  ********************
+# FRP:  y = b1 + b2*x + u
+
+rm(list = ls())
+
+
+b <- c(5,5)  # Definiendo parametros muestrales
+N <- 500     # Tamaño de la poblacion
+
+# Generate Xs
+
+level<-seq(2,12,length.out = 6)
+
+ 
+y<-vector(length = N)
+x<-vector(length = N)
+u<-rnorm(N,mean=0, sd=10)
+
+for (i in 1:N){
+  x[i]<-sample(level,1)
+  y[i]<-b[1]+b[2]*x[i]+u[i]
+}
+table (x)
+summary(y)
+plot(x,y)
+
+y<- ifelse(y<0,0,y)
+summary(y)
+plot(x,y, main="Exam Results" , ylab="Score", xlab="Hours", col="red")
+abline(a=b[1], b=b[2], col="red")
+```
+
+Una vez generdo las datos, la estadíatica descriptiva de *Scores* y *Hours* es la siguiente:
+
+
+```{r b, echo=FALSE}
+# ************   Preparando para Tomar la Muestra   ******************************#
+
+# Creaamos un Data Frame
+
+scores<-data.frame(score=y,hours=x)
+head(scores)
+stargazer(scores, type = "text")
+stargazer(scores)
+
+```
+
+
+
+
+
+
+
+
+
+
+
