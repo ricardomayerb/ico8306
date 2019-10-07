@@ -3,7 +3,7 @@ library(ggplot2)
 library(dplyr)
 
 
-# 1) Use la funcion read_excel para importar la base de datos "nombres60.xlsx" 
+# 1) Use la función read_excel para importar la base de datos "nombres60.xlsx" 
 #    guarde el tibble resultante un objeto de nombre "notas"
 
 # Sol: (no olvidar las comillas y la extensión .xlsx del archivo)
@@ -116,7 +116,7 @@ notas %>%
 
 # 8) Suponga que tiene una población de 10000 observaciones provemientes
 # de una distribución exponencial con valor esperado igual a 1. Suponga que 
-# de exta poblacion extraemos muestras de tamaño igual a 25 observaciones. 
+# de esta poblacion extraemos muestras de tamaño igual a 25 observaciones. 
 # Cree un histograma de las medias muestrales y calcule la desviación 
 # estándar de las medias muestrales. Utilice 500 muestras para el histograma y
 # el cálculo de la desviación estándar.
