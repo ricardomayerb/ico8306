@@ -1,0 +1,132 @@
+---
+title: "Tamaño y error muestral"
+author: "Ricardo Mayer"
+date: "Octubre de 2019"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    theme: flatly
+    df_print: paged
+    code_folding: show
+    fig_caption: true
+    include:
+      before_body: header.html
+      after_body: footer.html
+  bookdown::pdf_document2:
+    keep_tex: true
+  bookdown::word_document2:
+    toc: true
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+```
+
+
+
+
+# Estimadores y margen de error
+
+El objetivo de la estimación por intervalo es aportar información de qué tan cerca se encuentra la estimación puntual, obtenida de la muestra, del valor del parámetro poblacional. 
+ 
+En el **capítulo 8 de AyS** se muestra cómo obtener una estimación por intervalo para la media poblacional mu y para la proporción poblacional p.
+
+La fórmula general para obtener una estimación por intervalo para la media poblacional es
+
+
+\begin{equation}
+\bar{x} ~ \pm \text{ Margen de error para } \bar{x}
+\end{equation}
+
+La fórmula general para obtener una estimación por intervalo para la proporción poblacional es
+
+\begin{equation}
+\bar{p} ~ \pm \text{ Margen de error para } \bar{p}
+\end{equation}
+
+## Media poblacional: $\sigma$ conocida
+
+La distribución muestral de $\bar{x}$ es aproximadamente normal para $n$ suficientemente grande con error estándar $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$, por lo tanto podemos usar $\sigma_{\bar{x}}$ como unidad básica para construir intervalos de confianza
+
+- 1.645 da origen a intervalos de confianza al 90%: $\bar{x} + \pm 1.645 \sigma_{\bar{x}}$
+- 1.96 da origen a intervalos de confianza al 95%: $\bar{x} + \pm 1.96 \sigma_{\bar{x}}$
+- 2.576 da origen a intervalos de confianza al 99%: $\bar{x} + \pm 2.576 \sigma_{\bar{x}}$
+- $z_{1 - \frac{\alpha}{2}} = - z_{\frac{\alpha}{2}}$  da origen a intervalos de confianza al $(1-\alpha)$%: $\bar{x} + \pm z_{\frac{\alpha}{2}} \sigma_{\bar{x}}$
+
+
+## Media poblacional: $\sigma$ desconocida
+
+- Usamos $s$ en vez de $\sigma$
+
+-  En vez de una normal, usamos una distribución normal con $n-1$ grados de libertad: en vez de usar los cuantiles 0.95, 0.975 y 0.995 de una normal estándar como lo hicimos arriba, encontraremos esos cuantiles para una una $t$ con $n-1$ grado de libertad
+
+- $t_{n,\frac{\alpha}{2}}$  da origen a intervalos de confianza al $(1-\alpha)$%: $\bar{x} + \pm t_{n,\frac{\alpha}{2}} \sigma_{\bar{x}}$
+
+- mientras mayores sean los grados de libertad (por tanto $n$) más cercanos seránlos valores de esta $t$ a los de una normal estándar
+
+## Determinación del tamaño de muestra
+
+Errores son
+
+\begin{equation}
+ E =  z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}
+\end{equation}
+
+
+\begin{equation}
+ E =  t_{n,\frac{\alpha}{2}} \frac{s}{\sqrt{n}}
+\end{equation}
+
+dependiendo de si $\sigma$ es conocida o no.
+
+
+Despejando $n$ tenemos qe  par aun error $E$:
+
+\begin{equation}
+ n =  (z_{\frac{\alpha}{2}})^ \frac{\sigma^2}{E^2}
+\end{equation}
+
+
+o 
+
+
+\begin{equation}
+
+ n =  (t_{n-1,\frac{\alpha}{2}})^ \frac{s^2}{E^2}
+\end{equation}
+
+
+## Estimación de una proporción
+
+Mrgen de error:
+
+\begin{equation}
+   z_{\frac{\alpha}{2}} \sqrt{\frac{p(1-p)}{n}} 
+\end{equation}
+
+
+\begin{equation}
+   z_{\frac{\alpha}{2}} \sqrt{\frac{\bar{p}(1-\bar{p})}{n}} 
+\end{equation}
+
+
+## Tamaño muestral para una proporción
+
+No podemos usar
+
+\begin{equation}
+   n = (z_{\frac{\alpha}{2}})^2 \frac{\bar{p}(1-\bar{p})}{E^2} 
+\end{equation}
+
+porque aún no tenemos una muestra para clacular $\bar{p}$, así es que utilizamos
+
+
+\begin{equation}
+   n = (z_{\frac{\alpha}{2}})^2 \frac{p^* (1-p^*)}{E^2} 
+\end{equation}
+
+EL $p^*$ puede venir de un estudio piloto, de información histórico, de adoptar el peor escenario (igual a 0.5) o que se cuente con una mejor aproximacion a $p$.
