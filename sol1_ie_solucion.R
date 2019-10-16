@@ -13,7 +13,7 @@ misdatos <- read_excel("datos_ie.xlsx")
 # 2.2 la mediana
 # 2.3 el cuantil 0.975
 # Nota la función quantile es la que calcula cuantiles de un vector. Por ejemplo si el vector se llama x y
-# queremos calcular el cuantil 37 escribiremos en R quantile(x, 0,37)
+# queremos calcular el cuantil 37 escribiremos en R quantile(x, 0.37)
 
 vel <- misdatos$velocidad_viento
 vq025 <- quantile(vel, 0.025)
