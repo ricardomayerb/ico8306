@@ -1,0 +1,56 @@
+---
+title: "Tarea 4 de Inferencia estadística"
+author: "Ricardo Mayer"
+date: "30/11/2019"
+output:
+  pdf_document:
+    number_section: true
+  html_document:
+    number_section: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Valores críticos 
+
+Calcule valores críticos al 1%, 5% y 10% de significancia para los siguientes casos
+
++  test para media poblacional, varianza conocida, $H_0: \mu \leq \mu_0$
++  test para media poblacional, varianza conocida, $H_0: \mu = \mu_0$
++  test para media poblacional, varianza desconocida, $H_0: \mu \leq \mu_0$, muestra de 22 observaciones
++  test para media poblacional, varianza desconocida, $H_0: \mu \leq \mu_0$, muestra de 22 observaciones
++  test para proporción poblacional,  $H_0: p \geq p_0$
++  test para proporción poblacional,  $H_0: p = p_0$
++  test para varianza poblacional,  $H_0: \sigma^2 \geq \sigma^2_0$, muestra de 30 datos
++  test para varianza poblacional,  $H_0: \sigma^2 = \sigma^2_0$, muestra de 30 datos
+
+## Ejemplo: test para media poblacional, varianza conocida, $H_0: \mu \leq \mu_0$
+
+Este es un test de una cola, en particular de cola derecha, porque los rechazos a la hiótesis nulas pueden ocurrir solo en la cola derecha (Nota: en inglés es más usual hablar de upper tail y lower tail, "cola superior" y "cola inferior", siendo lower tail la cola izquierda). De modo que busquemos valores que corten colas derechas con áreas iguales a uno, cinco y diez por ciento. O de forma equivalente, buscamos valores que acumulen a la *izquierda* de ellos 99, 95 y 90 por ciento: es la definición de quantil 0.99, 0.95 y 0.90. Pero para cual distribución vamos a buscar los quantiles? Si nos dijeran la varianza conocida y un valor hipotético para media, podríamos usar una distribución normal con esa media y esa varianza. Como no están especificadas, sólo podemos asumir que la persona haciendo el test va a estandarizar el resultado muestral (estadístico muestral) y por lo tanto usará una tabla o una función de normal estándar para buscar las zonas de rechazo. Busquemos entonces estos puntos críticos (quantiles) en una normal estándar
+
+```{r}
+areas_colas_derechas <- c(0.1, 0.05, 0.01)
+vc_90_95_99 <- qnorm(areas_colas_derechas)
+
+# estos son los valores criticos estandarizados para este test
+vc_90_95_99
+```
+
+
+
+# Tamaños muestrales, estadísticos y valores-p
+
+1. Genere tres muestras de números aleatorios provenientes de una distribución exponencial con media igual a 9. La primera muestra debe ser de tamaño 20, la segunda de tamaño 200 y la tercera de tamaño 2000.
+
+2. Un investigador está interesado en testear la hipótesis nula de que la media poblacional es igual a 8 (nosotros sabemos que es 9, pero el investigador que recibe nuestra muestra no lo sabe)
+
+3. Calcule la media muestral en cada una de las dos muestras
+
+4. Calcule el valor-p asociado a cada media muestral. Recuerde que la distribución de la media muestral depende de la raíz de $n$ (ver capítulo 9 del libro) y que en un caso $n$ es 20 y en otro 200. Recuerde además que estamos frente a un test de dos colas y que el investigador no conoce la varianza poblacional.
+
+5. Esos valores-p que encontró arriba, implican que la hipótesis nula (que sabemos es falsa) será rechazada al 1, 5 o 10 por ciento de significancia? Es distinto para cada muestra?
+
+
+
