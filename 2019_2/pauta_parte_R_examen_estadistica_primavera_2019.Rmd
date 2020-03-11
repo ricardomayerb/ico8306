@@ -1,0 +1,85 @@
+---
+title: "Pauta examen estadistica primavera 2019"
+author: "Ricardo Mayer"
+date: "29/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instrucciones
+
+1.  En RStudio, cree un nuevo R script
+2.  Guárdelo y nómbrelo de la siguiente manera:
+    +  `apellido-nombre-estadistica-apellidodelprofesor.R`
+    + `perez-juana-estadistica-mayer.R` 
+
+3.  Escriba sus respuestas en ese script. Cualquier texto o comentario debe ir como comentario de R (i.e. precedido de un #)
+4.  Antes de terminar, asegúrese de guardar todo su trabajo. No nos haremos responsables si envían una versión incompleta de su trabajo.
+5.  Al terminar, envíen sus archivos al correo electrónico de su profesor.
+                                                                                        
+
+## Preguntas
+
+1.  (10 puntos) Genere dos muestras de números aleatorios: una proveniente de una distribución normal estándar y otra proveniente de una distribución normal con valor esperado 5 y varianza 9. Cada muestra debe ser de tamaño 1000. Obtenga un histograma para cada muestra.
+
+```{r q1}
+# primera muestra:
+muestra_1 <- rnorm(n = 1000)
+
+# segunda muestra: (si la varianza es 9, la desv estandar es 3)
+muestra_2 <- rnorm(n = 1000, mean = 5, sd = 3)
+
+# histograma de la primera muestra
+# (no haremos cambios a la apariencia, pero si Ud los hace bienvenidos sean)
+hist(muestra_1)
+
+# histograma de la primera muestra
+hist(muestra_2)
+
+```
+
+
+2.  (10 puntos) Genere una muestra tamaño 500 con número aleatorios provenientes de una distribución exponencial con valor esperado igual a 20.
+    a.  (4) Calcule la media de su muestra. Es igual menor o mayor al valor esperado de esta distribución?
+    b.  (4) Calcule el cuantil 0.33 de su muestra. Es igual, menor o mayor que el cuantil 0.33 de esta distribucion?
+    c.  (2) Obtenga un gráfico de caja y bigotes (un box plot) de su muestra. Existen valores extremos? Justifique.
+    
+```{r q2}
+muestra_exp <- rexp(n = 500, rate = 1/20)
+
+# 2.a:
+media_muestral <- mean(muestra_exp)
+media_muestral
+# esta parte la podrían hacer "a mano" pero aquí usaremos la comparacion ">"
+es_mayor_q_valor_esperado <- media_muestral > 20
+
+# y el resultado es:
+es_mayor_q_valor_esperado
+
+
+# 2.b:
+q33 <- quantile(muestra_exp, probs = 0.33)
+q33
+
+# esta parte la podrían hacer "a mano" pero aquí usaremos la comparacion ">"
+qexp(0.33, rate = 1/20)
+q33_muestra_mayor_q33_dist<- q33 > qexp(0.33, rate = 1/20)
+
+# y el resultado es:
+q33_muestra_mayor_q33_dist
+
+
+# 2.c:
+boxplot(muestra_exp)
+
+# En los graficos de caja (o de caja y bigote) los valores extremos son representados
+# como puntos más allá de los bigotes. En este grafico se ve claramente que hay valores
+# extremos en la parte superior de la distribución, donde los valores son mayores
+
+```
+    
+    
+     

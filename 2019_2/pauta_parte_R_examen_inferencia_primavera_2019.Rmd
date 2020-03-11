@@ -1,0 +1,102 @@
+---
+title: "Pauta examen inferencia estadistica primavera 2019"
+author: "Ricardo Mayer"
+date: "29/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instrucciones
+
+1.  En RStudio, cree un nuevo R script
+2.  Guárdelo y nómbrelo de la siguiente manera:
+    +  `apellido-nombre-inferencia-apellidodelprofesor.R`
+    + `perez-juana-inferencia-mayer.R` 
+
+3.  Escriba sus respuestas en ese script. Cualquier texto o comentario debe ir como comentario de R (i.e. precedido de un #)
+4.  Antes de terminar, asegúrese de guardar todo su trabajo. No nos haremos responsables si envían una versión incompleta de su trabajo.
+5.  Al terminar, envíen sus archivos al correo electrónico de su profesor.
+                                                                                        
+
+## Preguntas
+
+1. (10 puntos) Genere aleatoriamente  una muestra de 20 valores provenientes de una población normal de media 10 y varianza 4. Utilizando estos datos, calcule un intervalo de confianza al 95% para la media de la población y otro al 99% para la varianza de la población.
+
+```{r q1}
+# varianza 4 implica desv estandar 2
+muestra <- rnorm(n = 20, mean = 10, sd = 2)
+xbar <- mean(muestra)
+s_cuadrado <- var(muestra)
+nm1 <- 20 - 1
+
+sd_del_promedio <- 2/sqrt(20)
+sd_del_promedio
+
+# quantiles pata el IC al 95% para la media poblacional
+q_025 <- qnorm(0.025, mean = 0, sd = 1) # para enfatizar q es cuantil de norm estand
+q_025
+# alternativamente podria usar el quantil 0.975 que igual pero con signo contrario
+q_975 <- qnorm(0.975, mean = 0, sd = 1) # para enfatizar q es cuantil de norm estand
+q_975
+
+# IC al 95% para la media poblacional
+c(xbar + q_025*sd_del_promedio,  xbar - q_025*sd_del_promedio)
+# esto también es correcto
+c(xbar - q_975*sd_del_promedio,  xbar + q_975*sd_del_promedio)
+
+
+# quantiles pata el IC al 99% de la varianza poblacional
+q_chisq_005 <- qchisq(0.005, df = nm1)
+q_chisq_995 <- qchisq(0.995, df = nm1)
+q_chisq_005
+q_chisq_995
+
+limite_izquierdo <- nm1*s_cuadrado/q_chisq_995
+limite_derecho <- nm1*s_cuadrado/q_chisq_005
+
+# IC al 99% para la varianza poblacional
+c(limite_izquierdo, limite_derecho)
+
+
+```
+
+
+2.  (10 puntos) Imagine que tiene un muestra que contiene 33 observaciones. No conoce el valor de la desviación estándar poblacional ($\sigma$), pero ha calculado que en su muestra  el valor de la desviación estándar corresponde a: $s=3,8$ y el promedio es igual a: $\bar{X} = 18$. Responda **usando el método del *p-value* (con un 90% de confianza)**, si rechazamos o no la nula en el siguiente test:
+
+\begin{eqnarray*}
+H_0:\hspace{0.5cm}\mu\leq 17\\
+H_1:\hspace{0.5cm}\mu > 17
+\end{eqnarray*}
+
+
+    
+```{r q2}
+# Es un test de cola derecha (hay una sola zona de rechazo, situada en la cola derecha)
+# El p-value será igual a la probabilidad acumulada desde el estadístico de prueba
+# hacia la derecha. Esto se puede calcular como 1 - Pr(x <= estadistico de prueba)
+# Como la varianza poblacional es desconocido, la distribución es una t-student con 
+# 32 grados de libertad
+
+mu0 <- 17
+n <- 33
+xbar <- 18
+sd_del_promedio <- 3.8/sqrt(n)
+
+xbar_estand <- (xbar-mu0)/sd_del_promedio
+p_val <- 1 - pt(xbar_estand, df = n-1)
+
+p_val
+
+# Para rechazar al 90% de confianza este p-value debe ser menor a 0.1
+# y en este caso se cumple, se rechaza la nula
+rechazo_nula_al_90 <- p_val < 0.1
+rechazo_nula_al_90
+
+
+```
+    
+    
+     
