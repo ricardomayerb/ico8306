@@ -1,0 +1,57 @@
+---
+title: "Tarea (sin nota): un Rmd mínimo"
+author: "Ricardo Mayer"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+    toc_depth: 2
+    
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+## Preliminares
+
+-   Vean los dos videos cortos sobre Rmarkdown que están en módulo *Primeros Pasos en R*, en el sitio del curso  en Canvas  ([video 04](https://www.youtube.com/watch?v=fn5kTNDr1Zo&t=7s) y [video 05](https://www.youtube.com/watch?v=fn5kTNDr1Zo&t=7s)). ^[Aunque el segundo video habla de insertar código en el documento y para esta tarea ustedes no necesitan insertar código de R, igual vean el video]
+
+-   En RStudio, vayan a Help --> Markdown Quick Reference,  para que aprendan a hacer listas, poner titulos de secciones, poner links, etc.
+
+
+
+## Instrucciones
+
+1.  Cree un nuevo documento Rmd (File --> New File --> R Markdown). Vieron el video, cierto?
+
+2.  Asegúrense de poner su nombre como author del documento (antes o después de crearlo)
+
+3.  Guarden el archivo con el siguiente nombre:  apellido_nombre_t2_8306_02.Rmd
+
+4.  Knit el archivo y obtengan un archivo HTML
+
+5.  Suban el archivo HTML a canvas, en la actividad de esta tarea.
+
+## Recursos adicionales
+
+No necesitan nada adicional para esta tarea, pero aqui hay más recursos para estimular su curiosidad y su apetito
+
+-  https://rmarkdown.rstudio.com/
+-  https://bookdown.org/yihui/rmarkdown/
+-  https://yihui.org/knitr/
+-  https://bookdown.org/yihui/blogdown/
+-  https://bookdown.org/yihui/bookdown/

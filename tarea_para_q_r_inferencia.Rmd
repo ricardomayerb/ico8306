@@ -1,0 +1,76 @@
+---
+title: "Tarea Para Ké"
+author: "Ricardo Mayer"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+    toc_depth: 2
+    
+---
+
+
+```{r setup, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+
+## Por qué `R`?
+
+Ha llegado hasta mis oídos el que algunos de ustedes no saben para qué estamos usando `R`. Después de pasar por todas las etapas del duelo (negación, ira, negociación, depresión y aceptación) decidí que esta era una excelente pregunta y una gran oportunidad para que ustedes puedan contestar esta pregunta. 
+
+
+## Preguntas a responder
+
+En concreto, deben  contestar tres preguntas que consideran tres niveles distintos:
+
+1. Para qué o por qué podrían usar `R` en su vida profesional
+2. Para qué o por qué podrían usar `R` en el resto de sus estudios de I.C.
+3. Para qué o por qué podrían usar `R` en este curso.
+
+
+## Preliminares
+
+-   Hagan la tarea sin nota número 2, donde practicarán el mínimo de crear un Rmd y subirlo.
+
+
+## Instrucciones
+
+En cada caso deben dar dos ejemplos y escribir un párrafo (o dos, si se sienten inspirados).
+En cada caso deben dejar links que hagan referencia a los ejemplos que están dando.
+La tarea debe ser escrita como un documento de Rmarkdown y debe ser enviada como un output html, aquel que se genera cuando hacen click en Knit.
+
+
+Asegúrense de poner su nombre como author del documento (antes o después de crearlo). Guarden el archivo con el siguiente nombre:  apellido_nombre_t2_8306_02.Rmd . Suban el archivo HTML a canvas, en la actividad de esta tarea, tal como lo hicieron en la tarea 2.
+
+
+
+## Algunas sugerencias
+
+- Básicamente busquen en internet, pero busquen tanto en inglés como en castellano, porque la mayoría de los recursos están en inglés.
+- No confundan la pregunta "Por qué o para qué aprender `R`" con "Debería aprender solamente `R`"?. Son muy distintas.
+- Aquí hay algunos recursos que pueden ser útiles para inspirarse:
+  +  https://data-flair.training/blogs/why-learn-r/
+  +  https://medium.com/365datascience/r-for-statistics-and-data-science-why-do-i-prefer-r-programming-26455791ce47
+  +  https://www.maximaformacion.es/blog-dat/que-es-r-software/
+  +  https://www.simplilearn.com/21-reasons-to-learn-r-python-and-hadoop-article
+  +  https://intellipaat.com/blog/why-learn-r-programming/
+  +  https://robjhyndman.com/hyndsight/rvsexcel/
+  +  https://campus.sagepub.com/blog/why-universities-are-switching-to-r-for-social-science
+  +  https://es.r4ds.hadley.nz/
+  +  https://www.openintro.org/
+  +  https://www.r-bloggers.com/
+  +  https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f
+  
